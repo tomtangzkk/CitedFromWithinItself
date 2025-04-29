@@ -6,6 +6,22 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
+  // ✅ 设置 CORS 允许所有来源访问（也可改为指定你的前端域名）
+res.setHeader("Access-Control-Allow-Origin", "https://citation-generator-client-eb0blvtd7-tom-tangzks-projects.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // ✅ 处理 preflight 请求（浏览器用 OPTIONS 探测权限）
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // ⬇️ 以下是你原来的 OpenAI 生成逻辑
+  // ...
+}
+
+
+export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Only GET requests allowed" });
   }
