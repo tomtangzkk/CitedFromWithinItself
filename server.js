@@ -6,7 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
